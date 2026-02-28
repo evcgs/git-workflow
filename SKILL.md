@@ -1,6 +1,14 @@
 ---
 name: git-workflow
 description: "Git workflow automation - Automate git commit and push, with README.md enforcement check. Use when you need to commit and push changes to GitHub, or when you want to ensure README.md is updated before committing."
+metadata:
+  {
+    "openclaw":
+      {
+        "emoji": "🔀",
+        "requires": { "bins": ["git", "node"] },
+      },
+  }
 ---
 
 # Git Workflow Skill

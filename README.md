@@ -1,174 +1,134 @@
-# Git Workflow
+# Git Workflow - 自动化Git工作流技能 V2.0
+## 🎯 项目说明
+Git Workflow是一套为OpenClaw设计的全自动化Git提交和推送工作流技能，不仅实现了基础的Git操作自动化，还包含了项目资产管理、质量规范检查、网络稳定性保障等增强功能，帮助开发者规范项目管理流程，提升提交效率。
 
-Git workflow automation - Automate git commit and push, with README.md enforcement check.
+### 解决的核心痛点
+- ❌ 经常忘记更新README.md就提交
+- ❌ 技能打包不规范，无法正常安装
+- ❌ 网络不稳定导致推送失败需要手动重试
+- ❌ 项目分散，无法统一管理所有技能/Agent项目
+- ❌ 提交信息不规范，版本追溯困难
 
----
+## ✨ 核心特性
+### 🔍 质量管控
+- ✅ README.md更新强制检查（可配置跳过）
+- ✅ README结构规范自动校验（符合统一模板要求）
+- ✅ 技能项目规范合规性检查（确保可安装、可运行）
+- ✅ 敏感信息扫描（防止API密钥、密码等泄露）
 
-## Features
+### 📦 项目管理
+- ✅ 工作区项目自动扫描与发现
+- ✅ 统一项目清单管理，记录所有项目元数据
+- ✅ 项目状态自动更新（开发中/已提交/已发布）
+- ✅ 版本号自动管理与升级
 
-- ✅ **README.md First!** - Mandatory README.md update check before committing
-- ✅ **Git Status Check** - Automatically check git status
-- ✅ **Auto-Add Files** - Automatically add modified files
-- ✅ **Conventional Commits** - Follow conventional commit message format
-- ✅ **Auto-Commit & Push** - One command to commit and push
-- ✅ **Remote Repo URL** - Automatically return remote repo URL after push
+### 🚀 智能推送
+- ✅ GitHub网络连通性预检查
+- ✅ 推送失败自动重试（最多3次）
+- ✅ 本地/远程分支差异自动对比，防止冲突
+- ✅ 网络不可用时自动提示，避免卡住
 
----
+### 📊 流程标准化
+- ✅ Conventional Commits提交信息规范
+- ✅ 更新日志自动生成与维护
+- ✅ 推送结果自动验证与报告
+- ✅ 全流程可追溯、可审计
 
-## Quick Start
-
-### As OpenClaw Skill
-
-**Scenario 1: Commit and push current directory**
+## 🏗️ 架构设计
 ```
-"帮我提交并推送当前项目"
-"Commit and push this project"
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   质量检查层   │────▶│   项目管理层   │────▶│   智能推送层   │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+       │                        │                        │
+       ▼                        ▼                        ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│ README规范检查  │     │ 项目自动扫描    │     │ 网络连通检查    │
+│ 技能规范检查    │     │ 元数据自动采集  │     │ 自动重试机制    │
+│ 敏感信息扫描    │     │ 状态自动更新    │     │ 差异对比校验    │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
-**Scenario 2: Specify commit message**
-```
-"帮我提交并推送，提交信息是：feat: 优化技能文档"
-"Commit and push with message: feat: optimize skill docs"
-```
+## 🚀 安装方式
+### 方式1：OpenClaw技能市场安装（推荐）
+1. 打开OpenClaw控制面板 → 技能市场
+2. 搜索「Git Workflow」
+3. 点击「安装」即可自动完成部署
 
-**Scenario 3: Commit only, no push**
-```
-"帮我提交到本地，先不推送"
-"Commit locally only, don't push"
-```
-
----
-
-### As Independent Script
-
+### 方式2：本地安装
 ```bash
-# Auto-generate commit message and push
-node scripts/git-workflow.mjs
-
-# Specify commit message and push
-node scripts/git-workflow.mjs "feat: optimize skill docs"
-
-# Commit only, no push
-node scripts/git-workflow.mjs "docs: update docs" --no-push
-
-# Skip README check (use with caution!)
-node scripts/git-workflow.mjs "feat: optimize" --skip-readme-check
-```
-
----
-
-## Core Principles
-
-### 1. README.md First! ⭐⭐⭐ (MANDATORY!)
-
-**BEFORE committing and pushing, ALWAYS confirm:**
-
-- [ ] **README.md is fully updated?**
-- [ ] **Important updates are recorded in README.md?**
-- [ ] **README.md structure is reasonable?**
-
-**If README.md is not updated, the skill will refuse to commit and remind you to update it first!**
-
----
-
-### 2. Commit Message Convention
-
-Follow conventional commits format:
-
-```
-<type>: <subject>
-```
-
-**Type options:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation update
-- `style`: Code style change
-- `refactor`: Refactor
-- `test`: Testing
-- `chore`: Build/tools
-
-**Examples:**
-```
-feat: add README.md enforcement check
-docs: update skill documentation
-fix: correct git status check
-```
-
----
-
-## Workflow
-
-```
-User requests commit/push
-    ↓
-⚠️ Check if README.md is updated?
-    ↓
-    ├─ No → Remind user to update README.md first
-    │
-    └─ Yes → Check git status
-              ↓
-         Has changes?
-              ├─ No → Tell user no changes
-              │
-              └─ Yes → Add modified files
-                        ↓
-                   Generate/get commit message
-                        ↓
-                   Commit locally
-                        ↓
-                   Need to push?
-                        ├─ No → Done, return commit result
-                        │
-                        └─ Yes → Push to remote
-                                  ↓
-                             Done, return result with remote repo URL
-```
-
----
-
-## Installation
-
-### As OpenClaw Skill
-
-Copy to OpenClaw skills directory:
-```bash
-cp -r git-workflow ~/.openclaw/workspace/skills/
-```
-
-### As Independent Tool
-
-Clone and install:
-```bash
+# 1. 下载到技能目录
+cd ~/.openclaw/skills
 git clone https://github.com/evcgs/git-workflow.git
+
+# 2. 安装依赖
 cd git-workflow
 npm install
+
+# 3. 全局命令注册
+npm link
 ```
 
----
+### 方式3：Docker一键部署
+```bash
+docker run -d \
+  --name git-workflow \
+  -v ~/.openclaw/workspace:/workspace \
+  evcgs/git-workflow:v2.0.0
+```
 
-## Important: README.md Update Checklist
+## 📝 使用指南
+### 基础命令
+```bash
+# 1. 提交并推送当前项目（自动生成提交信息）
+git-workflow
 
-**Before committing and pushing, confirm:**
+# 2. 指定提交信息提交并推送
+git-workflow "feat: 新增项目管理功能"
 
-- [ ] **README.md is fully updated**
-- [ ] **Important updates are recorded in README.md**
-- [ ] **README.md structure is reasonable**
+# 3. 仅本地提交，不推送到远程
+git-workflow "fix: 修复网络重试逻辑" --no-push
 
-**Remember: Update README first, then commit and push!**
+# 4. 跳过README检查（谨慎使用）
+git-workflow "chore: 调整配置文件" --skip-readme-check
 
----
+# 5. 跳过技能规范检查（谨慎使用）
+git-workflow "docs: 更新临时文档" --skip-skill-check
+```
 
-## Summary
+### 项目管理命令
+```bash
+# 扫描工作区所有项目，生成项目清单
+git-workflow scan
 
-This skill helps you:
+# 查看所有项目清单
+git-workflow list
+```
 
-1. **Enforce README.md updates** - Must confirm README is updated before committing
-2. **Simplify git workflow** - No need to remember multiple commands
-3. **Standardize commit messages** - Use conventional commit format
-4. **Auto-return remote URL** - Includes GitHub repo URL after push
+## 📝 更新日志
+### v2.0.0 (2026-03-09)
+- 🌟 新增：项目自动扫描与清单管理功能
+- 🌟 新增：README结构规范自动检查
+- 🌟 新增：技能项目规范合规性检查
+- 🌟 新增：GitHub网络连通性预检查
+- 🌟 新增：推送失败自动重试机制（3次）
+- 🌟 新增：本地/远程分支差异自动对比
+- 🌟 新增：项目元数据自动维护与更新
+- 优化：重构整个脚本架构，模块化设计
+- 优化：提升错误提示友好度，提供解决方案
+- 文档：更新README符合新的规范模板
 
----
+### v1.0.0 (2026-02-28)
+- ✅ 基础功能：README.md更新强制检查
+- ✅ 基础功能：自动生成规范的提交信息
+- ✅ 基础功能：一键提交并推送功能
+- ✅ 基础功能：支持仅本地提交模式
 
-*Project created: 2026-02-28*
-*Last updated: 2026-02-28*
+## 💬 交流与支持
+### 微信交流群
+扫码加入用户交流群，获取最新更新、使用技巧和技术支持：
+![wxq.jpg](wxq.jpg)
+> （群二维码已过期，请添加下方微信备注来意拉群）
+
+### 联系我们
+- **微信**：添加微信，备注「Git Workflow+来意」
+![wx.png](wx.png)

@@ -1,0 +1,47 @@
+{
+  "id": "git-workflow",
+  "name": "Git工作流自动化",
+  "version": "2.0.0",
+  "description": "自动化git提交和推送流程，包含README规范检查、技能质量管控、项目清单管理等功能",
+  "author": "OpenClaw社区",
+  "permissions": [
+    "file:read",
+    "file:write",
+    "exec:git",
+    "exec:curl"
+  ],
+  "categories": ["开发工具", "自动化"],
+  "requirements": {
+    "openclaw": ">=1.0.0",
+    "node": ">=16.0.0"
+  },
+  "install": {
+    "steps": [
+      "npm install"
+    ]
+  },
+  "usage": {
+    "commands": [
+      {
+        "name": "提交并推送",
+        "description": "自动检查并提交当前项目的修改",
+        "example": "git-workflow \"feat: 新增功能\""
+      },
+      {
+        "name": "仅本地提交",
+        "description": "提交到本地仓库，不推送到远程",
+        "example": "git-workflow \"fix: 修复bug\" --no-push"
+      },
+      {
+        "name": "查看项目清单",
+        "description": "列出所有已管理的项目",
+        "example": "git-workflow list"
+      },
+      {
+        "name": "扫描所有项目",
+        "description": "自动扫描工作区所有git项目",
+        "example": "git-workflow scan"
+      }
+    ]
+  }
+}

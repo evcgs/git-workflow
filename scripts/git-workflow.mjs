@@ -23,7 +23,8 @@
 
 import { execSync } from 'child_process';
 import { existsSync, readFileSync, writeFileSync, statSync } from 'fs';
-import { join, homedir } from 'path';
+import { join } from 'path';
+import { homedir } from 'os';
 
 // 全局配置
 const WORKSPACE_ROOT = join(homedir(), '.openclaw/workspace');
@@ -314,9 +315,36 @@ function scanAllProjects() {
   return projects;
 }
 
+function showUsage() {
+  console.log('📝 Git Workflow 使用方法：');
+  console.log('');
+  console.log('基础命令：');
+  console.log('  git-workflow [commit-message] [options]  提交并推送当前项目');
+  console.log('  git-workflow list                        查看项目清单');
+  console.log('  git-workflow scan                        扫描工作区所有项目');
+  console.log('');
+  console.log('选项：');
+  console.log('  --no-push              仅本地提交，不推送到远程');
+  console.log('  --skip-readme-check    跳过README更新检查');
+  console.log('  --skip-skill-check     跳过技能规范检查');
+  console.log('  --help, -h             显示帮助信息');
+  console.log('');
+  console.log('示例：');
+  console.log('  git-workflow "feat: 新增功能"');
+  console.log('  git-workflow "fix: 修复bug" --no-push');
+  console.log('  git-workflow list');
+  console.log('');
+}
+
 // 主函数
 function main() {
   const args = process.argv.slice(2);
+  
+  // 帮助信息
+  if (args.includes('--help') || args.includes('-h')) {
+    showUsage();
+    return;
+  }
   
   // 命令：list - 查看项目清单
   if (args[0] === 'list') {

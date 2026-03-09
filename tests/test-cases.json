@@ -1,0 +1,31 @@
+{
+  "testCases": [
+    {
+      "name": "帮助信息测试",
+      "type": "unit",
+      "input": "node scripts/git-workflow.mjs --help",
+      "expectedOutput": {
+        "success": true,
+        "contains": ["使用方法", "提交", "推送", "list", "scan"]
+      }
+    },
+    {
+      "name": "项目清单命令测试",
+      "type": "unit",
+      "input": "node scripts/git-workflow.mjs list",
+      "expectedOutput": {
+        "success": true,
+        "contains": ["项目清单", "项目ID", "类型", "版本"]
+      }
+    },
+    {
+      "name": "扫描项目命令测试",
+      "type": "unit",
+      "input": "node scripts/git-workflow.mjs scan",
+      "expectedOutput": {
+        "success": true,
+        "contains": ["扫描", "项目", "已保存"]
+      }
+    }
+  ]
+}

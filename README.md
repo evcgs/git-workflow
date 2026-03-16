@@ -126,9 +126,12 @@ git-workflow list
 ## 💬 交流与支持
 ### 微信交流群
 扫码加入用户交流群，获取最新更新、使用技巧和技术支持：
-![wxq.jpg](wxq.jpg)
-> （群二维码已过期，请添加下方微信备注来意拉群）
+
+<img src="https://raw.githubusercontent.com/evcgs/ai-fia-x/main/docs/images/wechat-group-qrcode.png" alt="OpenClaw交流群" width="200" height="200">
+
+> （如果群二维码已过期，请添加下方微信备注「Git Workflow+来意」拉群）
 
 ### 联系我们
 - **微信**：添加微信，备注「Git Workflow+来意」
-![wx.png](wx.png)
+
+<img src="https://raw.githubusercontent.com/evcgs/ai-fia-x/main/docs/images/wechat-qrcode.png" alt="作者微信" width="200" height="200">
